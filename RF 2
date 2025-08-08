@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV Feedback Tool</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(circle at center, #0f0c29, #302b63, #24243e);
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #e0e0e0;
+      overflow: hidden;
+      cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym38.cur'), auto;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.02),
+        rgba(255,255,255,0.02) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      z-index: 0;
+      pointer-events: none;
+      animation: scanline 10s linear infinite;
+    }
+
+    @keyframes scanline {
+      0% {
+        background-position: 0 0;
+      }
+      100% {
+        background-position: 0 100%;
+      }
+    }
+
+    .container {
+      position: relative;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff44;
+      width: 100%;
+      max-width: 500px;
+      backdrop-filter: blur(10px);
+      border: 2px solid #00ffff;
+      z-index: 1;
+    }
+
+    h1 {
+      font-weight: 700;
+      color: #00ffe0;
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease-in-out;
+    }
+
+    h1:hover {
+      color: #ff00c8;
+      text-shadow: 0 0 5px #ff00c8, 0 0 10px #ff00c8, 0 0 20px #ff00c8;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #80deea;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: 8px;
+      border: 1px solid #00ffe0;
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+      background: rgba(0,0,0,0.5);
+      color: #ffffff;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #18ffff;
+      background: rgba(0,0,0,0.7);
+    }
+
+    button {
+      width: 100%;
+      padding: 0.8rem;
+      background-color: #00ffe0;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #18ffff;
+      transform: scale(1.03);
+    }
+
+    #response {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #00e676;
+      font-weight: 600;
+    }
+
+    .chatbox {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 1px solid #00ffe0;
+      border-radius: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+      font-family: monospace;
+      color: #00ffe0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 AI-Powered Resume Feedback</h1>
+    <form id="cvForm">
+      <label for="linkedin">LinkedIn Profile (optional):</label>
+      <input type="url" id="linkedin" name="linkedin" />
+
+      <label for="resumeLink">Resume Link (Google Drive / Dropbox):</label>
+      <input type="url" id="resumeLink" name="resumeLink" required />
+
+      <label for="goal">Career Goal / Target Job Type:</label>
+      <textarea id="goal" name="goal" rows="4" required></textarea>
+
+      <button type="submit">⚡ Submit for Feedback</button>
+    </form>
+    <div id="response"></div>
+    <div class="chatbox" id="chatbox">
+      <strong>AI Assistant:</strong> Ready to give resume feedback...
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("cvForm");
+    const responseDiv = document.getElementById("response");
+    const chatbox = document.getElementById("chatbox");
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      responseDiv.innerHTML =
+        "✅ Thanks! Your CV will be reviewed and you'll receive feedback soon.";
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+      console.log("Submitted Data:", data);
+
+      chatbox.innerHTML += `<br/><strong>AI:</strong> Analyzing your resume link...`;
+      chatbox.innerHTML += `<br/><strong>AI:</strong> Looking at your target job role: <em>${data.goal}</em>`;
+      chatbox.innerHTML += `<br/><strong>AI:</strong> Expected response in a few minutes. You may close this tab.`;
+    });
+  </script>
+</body>
+</html>
