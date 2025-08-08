@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV Feedback Tool</title>
+</head>
+<body>
+  <h1>Get AI-Powered Resume Feedback</h1>
+  <form id="cvForm">
+    <label for="linkedin">LinkedIn Profile (optional):</label><br />
+    <input type="url" id="linkedin" name="linkedin" /><br /><br />
+
+    <label for="resumeLink">Link to Your Resume (Google Drive / Dropbox):</label><br />
+    <input type="url" id="resumeLink" name="resumeLink" required /><br /><br />
+
+    <label for="goal">Career Goal / Job Type You Want:</label><br />
+    <textarea id="goal" name="goal" rows="4" cols="50" required></textarea><br /><br />
+
+    <button type="submit">Submit for Feedback</button>
+  </form>
+
+  <div id="response" style="margin-top: 20px;"></div>
+
+  <script>
+    const form = document.getElementById("cvForm");
+    const responseDiv = document.getElementById("response");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      responseDiv.innerHTML =
+        "Thanks! Your CV will be reviewed and you'll receive feedback soon.";
+
+      // In real version, this would POST data to a backend
+      // For now, just simulate that submission happened.
+      const formData = new FormData(form);
+      console.log("Submitted Data:", Object.fromEntries(formData));
+    });
+  </script>
+</body>
+</html>  
